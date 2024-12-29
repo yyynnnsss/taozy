@@ -1,0 +1,49 @@
+{
+"spider":"https://gitlab.com/rzdpai1/test/-/raw/main/spider.jar;md5;f98827d83bb8ca104b0b1ead61a98c5b",
+"wallpaper":"https://深色壁纸.xxooo.cf/",
+"lives": [{
+"name": "live",
+"type": 0,
+"url": "https://ghproxy.net/raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u",
+"epg": "http://epg.112114.xyz/?ch={name}&date={date}",
+"logo": "https://epg.112114.xyz/logo/{name}.png"
+}],
+"sites":[
+{"key":"豆豆","name":"豆瓣┃推荐","type":3,"api":"csp_DouDou","searchable":0,"quickSearch":0,"filterable":0},
+{"key":"热播","name":"热播┃秒播","type":3,"api":"csp_AppTT","playerType":2,"searchable":1,"quickSearch":1,"changeable":1,"ext":"AO7TcBkd8I/B5wQc4Qma+pU="},
+{"key": "文才弹幕","name": "浪子┃秒播","type": 3,"api": "csp_Jpys","jar": "https://gitee.com/wzbdyr/xcz/raw/master/jar/danmu.php","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": {"danmu": true}},
+{"key": "Ali","name": "阿里┃秒播","type": 3,"api": "csp_Kanke","jar": "https://gitee.com/ltby1/spare/raw/master/1214wudi.jar"},
+{"key": "c","name": "视云┃秒播","type": 3,"api": "csp_Xingchen","jar": "https://gitee.com/ltby1/spare/raw/master/1214wudi.jar"},
+{"key": "低端","name": "低端┃秒播","type": 3,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","ext": "https://gitee.com/ltby1/spare/raw/master/lib/低端.js"},
+{"key": "drpy_js_瓜子影视","name": "瓜子┃秒播","type": 3,"playerType": 2,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","ext": "https://gitee.com/ltby1/spare/raw/master/lib/蓝天瓜子影视.js"},
+{"key":"南瓜","name":"南瓜┃秒播","type":3,"api":"csp_NanGua","playerType":2,"searchable":1,"quickSearch":1,"changeable":1},
+{"key":"文采","name":"文采┃秒播","type":3,"api":"csp_Jpys","playerType":2,"searchable":1,"quickSearch":1,"changeable":1},
+{"key":"糯米","name":"糯米┃秒播","type":3,"api":"csp_Nmyswv","searchable":1,"quickSearch":1,"changeable":1},
+{"key":"萌米","name":"萌米┃秒播","type":3,"api":"csp_AppTT","playerType":2,"searchable":1,"quickSearch":1,"changeable":1,"ext":"AO7TcBkd8Iifux0Y8Qze6tVlMg=="},
+{"key":"原创","name":"原创┃秒播","type":3,"api":"csp_YCyz","timeout":15,"playerType":1,"searchable":1,"quickSearch":1,"changeable":1},
+{"key": "PTT","name": "PTT┃繁体","type": 3,"api": "csp_PTT","jar": "https://gitee.com/ltby1/spare/raw/master/custom_spider.jar"},
+{"key": "txsp","name": "无敌┃4K","type": 3,"api": "https://gh-proxy.com/https://raw.githubusercontent.com/PizazzGY/TVBox/main/JS/drpy2.min.js","searchable": 1,"quickSearch": 1,"filterable": 1,"jar": "https://gitee.com/ltby1/tea/raw/master/libs/cz.jar","order_num": 0,"changeable": 0,"ext": "https://gitee.com/ltby1/spare/raw/master/lib/%E6%9C%80%E6%96%B0.js"},
+{"key": "360蓝天","name": "360┃解析","type": 3,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","ext": "https://gitee.com/ltby1/tea/raw/master/lib/360.js"},
+{"key": "奇珍异兽","name": "奇艺┃解析","type": 3,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","ext": "https://gitee.com/ltby1/tea/raw/master/lib/奇珍异兽.js"},
+{"key": "优酷","name": "优酷┃解析","type": 3,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","ext": "https://gitee.com/ltby1/spare/raw/master/lib/youku%E6%9C%80%E6%96%B0.js"},
+{"key": "txsp2","name": "腾讯┃解析","type": 3,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://gitee.com/ltby1/spare/raw/master/lib/蓝天白云.js"},
+{"key": "mgsp3","name": "芒果┃解析","type": 3,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://gitee.com/ltby1/spare/raw/master/lib/%E6%9C%80%E6%96%B0m.js"},
+{"key":"贱贱","name":"荐片┃P2P","type":3,"searchable":1,"quickSearch":1,"changeable":1,"playerType":"1","api":"https://ghp.ci/https://raw.githubusercontent.com/fantaiying7/EXT/refs/heads/main/drpy2.min.js","ext":"https://ghp.ci/https://raw.githubusercontent.com/fantaiying7/EXT/refs/heads/main/jp.js"},
+{"key":"新6V","name":"新6V┃P2P","type":3,"api":"csp_SixV","searchable":1,"quickSearch":1,"changeable":0,"ext":"https://www.xb6v.com/"},
+{"key": "蓝天白云无敌","name": "无敌┃P2P","type": 3,"api": "https://gitee.com/ltby1/one/raw/master/lib/drpy2.min.js","ext": "https://gitee.com/ltby1/spare/raw/master/lib/%E7%A3%81%E5%8A%9B%E7%86%8A2.js"}, 
+{"key":"Dm84","name":"巴士┃动漫","type":3,"api":"csp_Dm84","searchable":1,"quickSearch":1,"changeable":1},
+{"key":"Anime1","name":"日本┃动漫","type":3,"api":"csp_Anime1","searchable":1,"quickSearch":1,"changeable":1},
+{"key":"玩偶","name":"玩偶┃云盘","type":3,"api":"csp_WoGG","searchable":1,"quickSearch":1,"changeable":0,"ext":{"Cloud-drive":"tvfan/Cloud-drive.txt","from":"4k|auto","siteUrl":"https://www.wogg.net/","danMu":"弹"}},
+{"key":"Lib","name":"立播┃夸克","type":3,"api":"csp_Libvio","searchable":1,"quickSearch":1,"changeable":1,"ext":{"Cloud-drive":"tvfan/Cloud-drive.txt","from":"4k|auto"}},
+{"key":"Aliso","name":"盘搜┃阿里","type":3,"api":"csp_Aliso","searchable":1,"quickSearch":1,"changeable":0,"ext":{"Cloud-drive":"tvfan/Cloud-drive.txt","from":"4k|auto"}}
+],
+"logo":"http://q.qlogo.cn/headimg_dl?dst_uin=3420176748&spec=640&img_type=jpg",
+"parses":[
+{"name":"蓝天白云","type":0,"url":"https://jx.xmflv.com/?url="},
+{"name":"巧技","type":1,"url":"https://zy.qiaoji8.com/neibu.php?url=","ext":{"flag":["qq","腾讯","qiyi","爱奇艺","奇艺","youku","优酷","sohu","搜狐","letv","乐视","mgtv","芒果","tnmb","seven","bilibili","1905"],"header":{"User-Agent":"okhttp/4.9.1"}}},
+{"name":"巧技二","type":1,"url":"https://zy.qiaoji8.com/gouzi.php?url=","ext":{"flag":["qq","腾讯","qiyi","爱奇艺","奇艺","youku","优酷","sohu","搜狐","letv","乐视","mgtv","芒果","tnmb","seven","bilibili","1905","NetFilx"],"header":{"User-Agent":"okhttp/4.9.1"}}},
+{"name":"虾米","type":0,"url":"https://jx.xmflv.com/?url="},
+{"name":"咸鱼","type":0,"url":"https://jx.xymp4.cc/?url="},
+{"name":"华勇","type":0,"url":"https://huayong.net/vip4/?url="}
+]
+}
