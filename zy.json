@@ -44,7 +44,7 @@
     "key": "色猫资源|AV",
     "name": "色猫资源|AV",
     "type": 1,
-    "api": "https://api.maozyapi.com/inc/apijson_vod.php",
+    "api": "https://caiji.semaozy.net/inc/apijson_vod.php",
     "searchable": 1,
     "quickSearch": 1
     },
