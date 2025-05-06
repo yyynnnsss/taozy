@@ -12,7 +12,7 @@
             padding: 20px;
             background-color: #f7f7f7;
         }
-        .container {
+        。container {
             max-width: 600px;
             margin: 0 auto;
             background-color: #fff;
