@@ -1,850 +1,339 @@
-
 <!--
  * @package 163_music
  * @author Suxiaoqinx/kanxizai
- * @version 2.3
- * @Date 2025-05-15
+ * @version 1.0
+ * @Date 2025-02-26
 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noarchive">
-    <title>网易云音乐无损解析 - 高品质音乐下载工具</title>
+    <title>网易云无损解析</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+        }
 
-    <!-- SEO元标签 -->
-    <meta name="description" content="网易云音乐无损解析工具，支持FLAC、Hi-Res、杜比全景声等多种音质格式，免费在线解析下载网易云音乐高品质歌曲。">
-    <meta name="keywords" content="网易云音乐,无损音乐,音乐下载,FLAC,Hi-Res,杜比全景声,音乐解析,高品质音乐,免费音乐下载,免费音乐,网易云音乐解析">
-    <meta name="author" content="Suxiaoqinx/kanxizai">
-    <meta name="robots" content="index, follow">
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
 
-    <!-- Open Graph标签 -->
-    <meta property="og:title" content="网易云音乐无损解析 - 高品质音乐下载工具">
-    <meta property="og:description" content="免费在线解析下载网易云音乐高品质歌曲，支持FLAC、Hi-Res、杜比全景声等多种音质格式。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.kanxizai.cn/163_music/">
-    <meta property="og:image" content="https://www.kanxizai.cn/163_music/img/og-image.png">
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+        }
 
-    <!-- Twitter卡片 -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="网易云音乐无损解析 - 高品质音乐下载工具">
-    <meta name="twitter:description" content="免费在线解析下载网易云音乐高品质歌曲，支持多种音质格式。">
-    <meta name="twitter:image" content="https://www.kanxizai.cn/163_music/img/og-image.png">
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    <!-- 规范链接 -->
-    <link rel="canonical" href="https://yyynnnsss.github.io/taozy/wyy/">
+        .header h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: -0.025em;
+        }
 
-    <!-- 样式表 -->
-    <link href="https://cdn.kanxizai.cn/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.kanxizai.cn/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.kanxizai.cn/ajax/libs/APlayer/css/APlayer.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.kanxizai.cn/163_music/css/index.css?v=5.2.0">
-    <link rel="stylesheet" href="https://www.kanxizai.cn/163_music/css/playlist.css?v=5.2.0">
-    <link rel="stylesheet" href="https://www.kanxizai.cn/163_music/css/quality.css?v=5.2.0">
-    <link rel="stylesheet" href="https://www.kanxizai.cn/163_music/css/history-modal.css?v=5.2.0">
+        .card-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
 
-    <!-- JavaScript库 -->
-    <script src="https://cdn.kanxizai.cn/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/FileSaver/FileSaver.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/APlayer/js/APlayer.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/sweetalert2/js/sweetalert2.all.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/blueimp-md5/2.19.0/md5.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
-    <script src="https://cdn.kanxizai.cn/ajax/libs/browser-id3-writer/4.4.0/browser-id3-writer.min.js"></script>
+        .form-control {
+            border: 2px solid #e0e6ed;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
 
-    <!-- 统计脚本 -->
-    <script charset="UTF-8" id="LA_COLLECT" src="https://www.kanxizai.cn/163_music/js/vendor/js-sdk-pro.min.js"></script>
-    <script>LA.init({ id: "3LqkTrqSpXRKvmFy", ck: "3LqkTrqSpXRKvmFy" })</script>
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+        }
 
-    <!-- 暗黑模式切换脚本 -->
-    <script src="https://www.kanxizai.cn/163_music/js/theme-switcher.js?v=5.2.0"></script>
-    
-    <!-- 公告弹窗样式 -->
-    <link rel="stylesheet" href="https://www.kanxizai.cn/163_music/css/announcement.css?v=2.0.0">
+        .btn-primary {
+            background: var(--secondary-color);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .song-info img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .song-info img:hover {
+            transform: scale(1.03);
+        }
+
+        .aplayer {
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .lyric-box {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-control {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <!-- 公告弹窗 -->
-    <div class="announcement-modal" id="announcementModal" style="display: none;">
-        <div class="announcement-content">
-            <div class="announcement-header">
-                <h3>系统公告</h3>
-            </div>
-            <div class="announcement-body">
-                <div class="announcement-section system-announcement">
-                    <div class="section-title">
-                        <i class="fas fa-bullhorn"></i>
-                        系统公告
-                    </div>
-                    <div class="section-content" id="systemAnnouncement">
-                        正在加载公告内容...
-                    </div>
-                </div>
-                <div class="announcement-section disclaimer-section">
-                    <div class="section-title">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        免责声明协议
-                    </div>
-                    <div class="section-content" id="disclaimerContent">
-                        正在加载免责声明...
-                    </div>
-                </div>
-            </div>
-            <div class="announcement-footer">
-                <button class="confirm-btn" id="confirmBtn">我已阅读并同意</button>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
-        <div class="header position-relative">
-            <h1><i class="fas fa-music fa-bounce text-primary"></i> 网易云无损解析</h1>
+        <div class="header">
+            <h1>🎵 网易云无损解析</h1>
             <p class="text-muted">高品质音乐解析下载工具</p>
         </div>
 
-        <!-- 解析方式选择卡片 -->
-        <div class="parse-method-card mb-3 position-relative">
-            <!-- 历史记录 -->
-            <button id="history-btn" class="position-absolute" style="top: 10px; right: 50px;" title="播放历史">
-                <i class="fas fa-history"></i>
-            </button>
-
-            <!-- 设置 -->
-            <button id="settings-btn" class="position-absolute" style="top: 10px; right: 10px;" title="网站设置">
-                <i class="fas fa-cog"></i>
-            </button>
-
-            <div class="parse-method-header">
-                <i class="fas fa-tools text-primary me-2"></i>
-                <span class="fw-bold">解析方式</span>
-            </div>
-
-            <div class="parse-method-options">
-                <label class="parse-method-option" for="parseMethodSearch">
-                    <input class="parse-method-input" type="radio" name="parseMethod" id="parseMethodSearch"
-                        value="search" checked>
-                    <div class="parse-method-content">
-                        <div class="parse-method-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="parse-method-label">搜索解析</div>
-                    </div>
-                </label>
-
-                <label class="parse-method-option" for="parseMethodId">
-                    <input class="parse-method-input" type="radio" name="parseMethod" id="parseMethodId" value="id">
-                    <div class="parse-method-content">
-                        <div class="parse-method-icon">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <div class="parse-method-label">ID/链接解析</div>
-                    </div>
-                </label>
-
-                <label class="parse-method-option" for="parseMethodPlaylist">
-                    <input class="parse-method-input" type="radio" name="parseMethod" id="parseMethodPlaylist"
-                        value="playlist">
-                    <div class="parse-method-content">
-                        <div class="parse-method-icon">
-                            <i class="fas fa-list"></i>
-                        </div>
-                        <div class="parse-method-label">歌单解析</div>
-                    </div>
-                </label>
-            </div>
-        </div>
-
-        <!-- 搜索卡片 -->
-        <div id="search-parse-card" class="card-form mb-3 p-3 position-relative">
-            <div class="mb-2">
-                <label for="search_input" class="form-label fw-bold mb-1"><i
-                        class="fas fa-search text-primary me-2"></i>搜索歌曲</label>
-                <div class="input-group">
-                    <input type="text" id="search_input" class="form-control" placeholder="输入歌曲名称搜索">
-                    <span class="position-absolute"
-                        style="right:130px; top: 50%; transform: translateY(-50%); z-index: 5; cursor: pointer; display: none;"
-                        id="clear_search_btn" title="清空搜索">
-                        <i class="fas fa-times-circle text-muted"></i>
-                    </span>
-                    <button class="btn btn-primary" type="button" id="search_btn">
-                        <i class="fas fa-search"></i> 搜索
-                    </button>
-                </div>
-            </div>
-
-            <!-- 搜索卡片中添加音质选择 -->
-            <div class="mb-3">
-                <label class="form-label fw-bold"><i class="fas fa-headphones-alt text-primary me-2"></i>音质选择</label>
-                <div id="search-quality-container">
-                    <!-- 音质选择器JS动态生成 -->
-                </div>
-            </div>
-            <div id="search_results" class="search-results mt-2 d-none">
-                <div class="list-group" id="results_list"></div>
-                <div class="text-center mt-1 d-none" id="loading_indicator">
-                    <div class="spinner-border text-primary spinner-border-sm" role="status">
-                        <span class="visually-hidden">加载中...</span>
-                    </div>
-                    <p class="text-muted small mb-1">搜索中...</p>
-                </div>
-                <p class="text-muted small text-center mt-1 mb-0">点击歌曲可直接解析</p>
-            </div>
-        </div>
-
-        <!-- 歌曲ID或URL解析 -->
-        <div id="id-parse-card" class="card-form mb-3 p-3 position-relative">
+        <div class="card-form">
             <form id="query-form">
                 <div class="mb-4">
-                    <label for="song_ids" class="form-label fw-bold"><i
-                            class="fas fa-list text-primary me-2"></i>歌曲ID或URL</label>
-                    <input type="text" id="song_ids" class="form-control" placeholder="请输入歌曲ID或分享链接">
+                    <label for="song_ids" class="form-label fw-bold">歌曲ID或URL</label>
+                    <input type="text" id="song_ids" class="form-control" 
+                           placeholder="请输入歌曲ID或分享链接">
                 </div>
                 <div class="mb-4">
-                    <label class="form-label fw-bold"><i
-                            class="fas fa-headphones-alt text-primary me-2"></i>音质选择</label>
-                    <div id="id-quality-container">
-                        <!-- 音质选择器JS动态生成 -->
-                    </div>
+                    <label for="level" class="form-label fw-bold">音质选择</label>
+                    <select id="level" class="form-select">
+                        <option value="standard">标准音质</option>
+                        <option value="exhigh">极高音质</option>
+                        <option value="lossless">无损音质</option>
+                        <option value="hires">Hires音质</option>
+                        <option value="sky">沉浸环绕声</option>
+                        <option value="jyeffect">高清环绕声</option>
+                        <option value="jymaster">超清母带</option>
+                    </select>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">立即解析</button>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        🎶 立即解析
+                    </button>
                 </div>
             </form>
         </div>
 
-        <!-- 歌单解析卡片 -->
-        <div id="playlist-parse-card" class="card-form mb-3 p-3 position-relative">
-            <form id="playlist-form">
-                <div class="mb-4">
-                    <label for="playlist_id" class="form-label fw-bold"><i
-                            class="fas fa-list text-primary me-2"></i>歌单ID或URL</label>
-                    <input type="text" id="playlist_id" class="form-control" placeholder="请输入歌单ID或分享链接">
-                </div>
-                <div class="mb-4">
-                    <label class="form-label fw-bold"><i
-                            class="fas fa-headphones-alt text-primary me-2"></i>音质选择</label>
-                    <div id="playlist-quality-container">
-                        <!-- 音质选择器JS动态生成 -->
-                    </div>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">解析歌单</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- 歌单结果显示 -->
-        <div id="playlist-result" class="result-card d-none">
-            <div class="playlist-info mb-4">
-                <div class="playlist-cover">
-                    <img id="playlist-cover" src="" alt="歌单封面" referrerpolicy="no-referrer">
-                </div>
-                <div class="playlist-meta">
-                    <h4 id="playlist-name" class="playlist-name"></h4>
-                    <div class="playlist-meta-item">
-                        <i class="fas fa-user text-primary"></i>
-                        <div>创建者：<span id="playlist-creator" class="fw-medium"></span></div>
-                    </div>
-                    <div class="playlist-meta-item">
-                        <i class="fas fa-music text-danger"></i>
-                        <div>歌曲数：<span id="playlist-track-count" class="fw-medium"></span></div>
-                    </div>
-                    <div class="playlist-meta-item">
-                        <i class="fas fa-calendar-alt text-success"></i>
-                        <div>创建时间：<span id="playlist-create-time" class="fw-medium"></span></div>
-                    </div>
-                    <div class="mt-3">
-                        <button id="download-all" class="btn btn-primary rounded-pill px-4">
-                            <i class="fas fa-download me-2"></i>一键下载全部
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="playlist-tracks mt-4">
-                <h5 class="mb-3"><i class="fas fa-list-ul text-primary me-2"></i>歌曲列表</h5>
-                <div class="playlist-tracks-container">
-                    <div id="playlist-tracks-list">
-                        <!-- 歌曲列表将通过JS动态生成 -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- 批量下载进度 -->
-            <div id="batch-download-progress" class="mt-4 d-none">
-                <h5 class="mb-3"><i class="fas fa-tasks text-primary me-2"></i>批量下载进度</h5>
-                <div class="progress mb-2">
-                    <div id="batch-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated"
-                        role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                        title="批量下载进度" aria-label="批量下载进度"></div>
-                </div>
-                <p id="batch-status" class="text-center">准备下载...</p>
-                <div id="batch-details" class="small text-muted"></div>
-            </div>
-        </div>
-
-        <!-- 歌曲信息页面 -->
         <div id="song-info" class="result-card d-none">
-            <div class="song-info">
-                <div id="aplayer" class="aplayer-container"></div>
+            <div id="aplayer"></div>
+            <div class="song-info text-center">
+                <img id="song_pic" src="" alt="专辑封面" class="img-fluid">
+                <h3 class="mt-3" id="song_name"></h3>
+                <p class="text-muted" id="artist_names"></p>
             </div>
-
+            
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <p><strong><i class="fas fa-music text-danger"></i> 歌名：</strong><span id="song_name"></span></p>
-                    <p><strong><i class="fas fa-microphone text-success"></i> 歌手：</strong><span
-                            id="artist_names"></span></p>
-                    <p><strong><i class="fas fa-compact-disc text-primary"></i> 专辑：</strong><span
-                            id="song_alname"></span></p>
-                    <p><strong><i class="fas fa-sliders-h text-warning"></i> 音质：</strong><span id="song_level"></span>
-                    </p>
-                    <p><strong><i class="fas fa-box text-info"></i> 大小：</strong><span id="song_size"></span></p>
+                    <p><strong>📀 专辑：</strong><span id="song_alname"></span></p>
+                    <p><strong>🎚️ 音质：</strong><span id="song_level"></span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>📦 大小：</strong><span id="song_size"></span></p>
+                    <p><strong>⬇️ 下载：</strong><a id="song_url" href="" target="_blank" class="text-decoration-none">立即下载</a></p>
                 </div>
             </div>
 
-            <!-- 下载按钮 -->
-            <div class="d-grid">
-                <button id="download-pack" class="btn btn-primary btn-lg">
-                    📥 下载歌曲
-                </button>
-            </div>
-            <!-- 进度条 -->
-            <div class="progress-container mt-3 d-none">
-                <div class="progress">
-                    <div id="download-progress" class="progress-bar progress-bar-striped" role="progressbar"
-                        title="下载进度" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        <span id="progress-text">0%</span>
-                    </div>
-                </div>
-                <p id="download-status" class="text-center mt-2 text-muted small">准备下载...</p>
-            </div>
-
-            <!-- 歌词 -->
-            <!-- <div class="lyric-box">
+            <div class="lyric-box">
                 <h5>📜 歌词</h5>
                 <div id="lyric" class="text-secondary"></div>
-            </div> -->
-        </div>
-
-        <!-- 网站信息手风琴 -->
-        <div class="site-info-section mt-4 mb-3">
-            <div class="section-header text-center mb-3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <hr class="flex-grow-1 border-top border-2 border-primary opacity-25 rounded-pill">
-                    <span class="mx-3 text-primary fw-bold px-3 py-1 rounded-pill bg-light shadow-sm"
-                        style="font-size:1.1rem;">
-                        <i class="fas fa-info-circle me-2"></i>本站信息
-                    </span>
-                    <hr class="flex-grow-1 border-top border-2 border-primary opacity-25 rounded-pill">
-                </div>
-            </div>
-
-
-
-            <!-- 关于我们 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingAbout">
-                    <button class="accordion-button collapsed shadow-none bg-light" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseAbout" aria-expanded="false"
-                        aria-controls="collapseAbout">
-                        <i class="fas fa-heart text-primary me-2"></i>
-                        <span class="fw-bold">关于我们</span>
-                    </button>
-                </h2>
-                <div id="collapseAbout" class="accordion-collapse collapse" aria-labelledby="headingAbout"
-                    data-bs-parent="#siteInfoAccordion">
-                    <div class="accordion-body bg-white">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <div class="mb-3">
-                                    <h5 class="text-primary mb-2">
-                                        <i class="fas fa-music me-2"></i>专业音乐下载平台
-                                    </h5>
-                                    <p class="text-muted mb-3 lh-lg">
-                                        基于网易云音乐API构建的高品质音乐下载工具，为音乐爱好者提供
-                                        <span class="text-primary fw-semibold">便捷、高效、专业</span>的音乐获取体验。
-                                    </p>
-                                </div>
-                                <div class="d-flex flex-wrap gap-2">
-                                    <span class="badge bg-primary-subtle text-primary px-3 py-2">
-                                        <i class="fas fa-crown me-1"></i>多音质支持
-                                    </span>
-                                    <span class="badge bg-success-subtle text-success px-3 py-2">
-                                        <i class="fas fa-bolt me-1"></i>快速解析
-                                    </span>
-                                    <span class="badge bg-info-subtle text-info px-3 py-2">
-                                        <i class="fas fa-shield-alt me-1"></i>安全稳定
-                                    </span>
-                                    <span class="badge bg-warning-subtle text-warning px-3 py-2">
-                                        <i class="fas fa-palette me-1"></i>个性定制
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="p-3">
-                                    <div class="bg-primary-subtle rounded-circle d-inline-flex align-items-center justify-content-center"
-                                        style="width: 80px; height: 80px;">
-                                        <i class="fas fa-headphones text-primary" style="font-size: 2rem;"></i>
-                                    </div>
-                                    <div class="mt-3">
-                                        <small class="text-muted d-block">让音乐触手可及</small>
-                                        <small class="text-primary fw-semibold">Music Within Reach</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 使用指南 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingUsage">
-                    <button class="accordion-button collapsed shadow-none bg-light" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseUsage" aria-expanded="false"
-                        aria-controls="collapseUsage">
-                        <i class="fas fa-compass text-primary me-2"></i>
-                        <span class="fw-bold">使用指南</span>
-                    </button>
-                </h2>
-                <div id="collapseUsage" class="accordion-collapse collapse" aria-labelledby="headingUsage"
-                    data-bs-parent="#siteInfoAccordion">
-                    <div class="accordion-body bg-white">
-                        <div class="row">
-                            <!-- 操作流程 -->
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="bg-primary-subtle rounded-circle d-inline-flex align-items-center justify-content-center me-3"
-                                        style="width: 40px; height: 40px;">
-                                        <i class="fas fa-play text-primary"></i>
-                                    </div>
-                                    <h6 class="text-primary mb-0 fw-bold">操作流程</h6>
-                                </div>
-                                <div class="ps-4">
-                                    <div class="d-flex mb-3">
-                                        <span
-                                            class="badge bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center"
-                                            style="width: 24px; height: 24px; font-size: 12px;">1</span>
-                                        <div>
-                                            <div class="fw-semibold text-dark">选择解析方式</div>
-                                            <small class="text-muted">支持搜索解析、ID/链接解析、歌单解析</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mb-3">
-                                        <span
-                                            class="badge bg-success text-white rounded-circle me-3 d-flex align-items-center justify-content-center"
-                                            style="width: 24px; height: 24px; font-size: 12px;">2</span>
-                                        <div>
-                                            <div class="fw-semibold text-dark">选择音质格式</div>
-                                            <small class="text-muted">标准、极高、无损、Hi-Res等音质选项</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mb-3">
-                                        <span
-                                            class="badge bg-info text-white rounded-circle me-3 d-flex align-items-center justify-content-center"
-                                            style="width: 24px; height: 24px; font-size: 12px;">3</span>
-                                        <div>
-                                            <div class="fw-semibold text-dark">个性化设置</div>
-                                            <small class="text-muted">调整主题模式、文件命名格式等偏好</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <span
-                                            class="badge bg-warning text-white rounded-circle me-3 d-flex align-items-center justify-content-center"
-                                            style="width: 24px; height: 24px; font-size: 12px;">4</span>
-                                        <div>
-                                            <div class="fw-semibold text-dark">开始解析下载</div>
-                                            <small class="text-muted">点击解析按钮，等待处理完成后下载</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 下载功能 -->
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="bg-success-subtle rounded-circle d-inline-flex align-items-center justify-content-center me-3"
-                                        style="width: 40px; height: 40px;">
-                                        <i class="fas fa-download text-success"></i>
-                                    </div>
-                                    <h6 class="text-success mb-0 fw-bold">下载功能</h6>
-                                </div>
-                                <div class="ps-4">
-                                    <div class="card border-0 bg-light-subtle">
-                                        <div class="card-body p-3">
-                                            <div class="d-flex align-items-start mb-2">
-                                                <i class="fas fa-cog text-primary me-2 mt-1"
-                                                    style="font-size: 14px;"></i>
-                                                <div>
-                                                    <div class="fw-semibold" style="font-size: 14px;">智能命名</div>
-                                                    <small class="text-muted">支持"歌曲-歌手"或"歌手-歌曲"格式</small>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-start mb-2">
-                                                <i class="fas fa-tags text-info me-2 mt-1" style="font-size: 14px;"></i>
-                                                <div>
-                                                    <div class="fw-semibold" style="font-size: 14px;">元数据写入</div>
-                                                    <small class="text-muted">自动添加完整的标签信息（如：歌曲名、歌手、专辑等）</small>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-start mb-2">
-                                                <i class="fas fa-archive text-warning me-2 mt-1"
-                                                    style="font-size: 14px;"></i>
-                                                <div>
-                                                    <div class="fw-semibold" style="font-size: 14px;">打包选项</div>
-                                                    <small class="text-muted">单文件下载或ZIP压缩包下载（需要开启ZIP打包下载）</small>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-start mb-2">
-                                                <i class="fas fa-clock text-danger me-2 mt-1"
-                                                    style="font-size: 14px;"></i>
-                                                <div>
-                                                    <div class="fw-semibold" style="font-size: 14px;">下载进度</div>
-                                                    <small class="text-muted">实时显示进度，支持大文件传输</small>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-start">
-                                                <i class="fas fa-folder-open text-success me-2 mt-1"
-                                                    style="font-size: 14px;"></i>
-                                                <div>
-                                                    <div class="fw-semibold" style="font-size: 14px;">完整资源（需要开启ZIP打包下载）
-                                                    </div>
-                                                    <small class="text-muted">音频+封面(JPG)+歌词(LRC)</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 版权声明 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingCopyright">
-                    <button class="accordion-button collapsed shadow-none bg-light" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseCopyright" aria-expanded="false"
-                        aria-controls="collapseCopyright">
-                        <i class="fas fa-shield-alt text-primary me-2"></i>
-                        <span class="fw-bold">版权声明</span>
-                    </button>
-                </h2>
-                <div id="collapseCopyright" class="accordion-collapse collapse" aria-labelledby="headingCopyright"
-                    data-bs-parent="#siteInfoAccordion">
-                    <div class="accordion-body bg-white">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="alert alert-danger border-0 shadow-sm mb-3">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="bg-danger-subtle rounded-circle d-inline-flex align-items-center justify-content-center me-3"
-                                            style="width: 40px; height: 40px;">
-                                            <i class="fas fa-ban text-danger"></i>
-                                        </div>
-                                        <h6 class="text-danger mb-0 fw-bold">重要声明</h6>
-                                    </div>
-                                    <div class="ps-4">
-                                        <div class="d-flex align-items-start mb-2">
-                                            <i class="fas fa-exclamation-triangle text-danger me-2 mt-1"
-                                                style="font-size: 14px;"></i>
-                                            <div class="fw-bold text-danger">严禁任何商业用途！本工具仅供个人学习研究使用</div>
-                                        </div>
-                                        <div class="d-flex align-items-start mb-2">
-                                            <i class="fas fa-user-shield text-warning me-2 mt-1"
-                                                style="font-size: 14px;"></i>
-                                            <div class="fw-bold text-danger">用户行为与本站无关，作者不承担任何法律责任</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="alert alert-info border-0 shadow-sm">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="bg-info-subtle rounded-circle d-inline-flex align-items-center justify-content-center me-3"
-                                            style="width: 40px; height: 40px;">
-                                            <i class="fas fa-info-circle text-info"></i>
-                                        </div>
-                                        <h6 class="text-info mb-0 fw-bold">服务说明</h6>
-                                    </div>
-                                    <div class="ps-4">
-                                        <div class="d-flex align-items-start mb-2">
-                                            <i class="fas fa-server text-info me-2 mt-1" style="font-size: 14px;"></i>
-                                            <div>本站不提供任何音视频存储服务</div>
-                                        </div>
-                                        <div class="d-flex align-items-start mb-2">
-                                            <i class="fas fa-cogs text-info me-2 mt-1" style="font-size: 14px;"></i>
-                                            <div>只提供最基本的解析服务</div>
-                                        </div>
-                                        <div class="d-flex align-items-start">
-                                            <i class="fas fa-copyright text-info me-2 mt-1"
-                                                style="font-size: 14px;"></i>
-                                            <div>如有版权问题，请通过下方联系方式与我们沟通</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 text-center">
-                                <div class="p-3">
-                                    <div class="bg-warning-subtle rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                                        style="width: 80px; height: 80px;">
-                                        <i class="fas fa-balance-scale text-warning" style="font-size: 2rem;"></i>
-                                    </div>
-                                    <div class="mb-3">
-                                        <small class="text-muted d-block">合规使用</small>
-                                        <small class="text-warning fw-semibold">Legal Compliance</small>
-                                    </div>
-                                    <div class="d-flex flex-wrap gap-2 justify-content-center">
-                                        <span class="badge bg-danger-subtle text-danger px-2 py-1">
-                                            <i class="fas fa-graduation-cap me-1"></i>学习研究
-                                        </span>
-                                        <span class="badge bg-success-subtle text-success px-2 py-1">
-                                            <i class="fas fa-heart me-1"></i>个人使用
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 联系我们 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingContact">
-                    <button class="accordion-button collapsed shadow-none bg-light" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#collapseContact" aria-expanded="false"
-                        aria-controls="collapseContact">
-                        <i class="fas fa-comments text-primary me-2"></i>
-                        <span class="fw-bold">联系我们</span>
-                    </button>
-                </h2>
-                <div id="collapseContact" class="accordion-collapse collapse" aria-labelledby="headingContact"
-                    data-bs-parent="#siteInfoAccordion">
-                    <div class="accordion-body bg-white">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <div class="mb-3">
-                                    <h5 class="text-primary mb-2">
-                                        <i class="fas fa-user-tie me-2"></i>开发者：kanxizai
-                                    </h5>
-                                    <p class="text-muted mb-3 lh-lg">
-                                        如有问题、建议，欢迎通过以下方式与我们取得联系。
-                                        我们会尽快回复您的消息。
-                                    </p>
-                                </div>
-
-                                <div class="row g-3">
-                                    <div class="col-sm-6">
-                                        <a href="mailto:kanxizai@qq.com"
-                                            class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center py-3">
-                                            <i class="fas fa-envelope me-2"></i>
-                                            <div class="text-start">
-                                                <div class="fw-semibold">邮箱联系</div>
-                                                <small class="text-muted">kanxizai@qq.com</small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <a href="https://qm.qq.com/q/vA7WqEjEgo" target="_blank" rel="noopener"
-                                            class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center py-3">
-                                            <i class="fab fa-qq me-2"></i>
-                                            <div class="text-start">
-                                                <div class="fw-semibold">QQ联系</div>
-                                                <small class="text-muted">3192777846</small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-12">
-                                        <a href="https://qm.qq.com/q/cVBPMYO1cA" target="_blank" rel="noopener"
-                                            class="btn btn-outline-info w-100 d-flex align-items-center justify-content-center py-3">
-                                            <i class="fas fa-users me-2"></i>
-                                            <div class="text-start">
-                                                <div class="fw-semibold">加入交流群</div>
-                                                <small class="text-muted">与其他用户交流使用心得</small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 text-center">
-                                <div class="p-3">
-                                    <div class="bg-primary-subtle rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                                        style="width: 80px; height: 80px;">
-                                        <i class="fas fa-handshake text-primary" style="font-size: 2rem;"></i>
-                                    </div>
-                                    <div class="mb-3">
-                                        <small class="text-muted d-block">随时为您服务</small>
-                                        <small class="text-primary fw-semibold">Always Here to Help</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- 历史记录弹窗 -->
-    <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="historyModalLabel">
-                        <i class="fas fa-history text-primary me-2"></i>播放历史
-                        <span class="badge bg-secondary ms-2" id="history-count">0</span>
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="history-list" class="list-group">
-                        <!-- 历史记录将通过JavaScript动态添加 -->
-                    </div>
-                    <div id="no-history" class="text-center py-4 text-muted">
-                        <i class="fas fa-info-circle me-2"></i>暂无播放历史
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" id="clear-history-btn">
-                        <i class="fas fa-trash-alt me-2"></i>清空历史
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
 
-    <!-- 设置弹窗 -->
-    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="settingsModalLabel">
-                        <i class="fas fa-cog text-primary me-2"></i>网站设置
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- 主题设置 -->
-                    <div class="setting-section mb-4">
-                        <h6 class="setting-title">
-                            <i class="fas fa-palette text-primary me-2"></i>主题设置
-                        </h6>
-                        <div class="setting-content">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="themeMode" id="systemMode"
-                                    value="system" checked>
-                                <label class="form-check-label" for="systemMode">
-                                    <i class="fas fa-desktop text-secondary me-1"></i>跟随系统
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="themeMode" id="lightMode"
-                                    value="light">
-                                <label class="form-check-label" for="lightMode">
-                                    <i class="fas fa-sun text-warning me-1"></i>浅色模式
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="themeMode" id="darkMode"
-                                    value="dark">
-                                <label class="form-check-label" for="darkMode">
-                                    <i class="fas fa-moon text-info me-1"></i>暗黑模式
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+    <script>
+        $(document).ready(function() {
+            function lrctrim(lyrics) {
+                const lines = lyrics.split('\n');
+                const data = [];
 
-                    <!-- 文件命名格式设置 -->
-                    <div class="setting-section mb-4">
-                        <h6 class="setting-title">
-                            <i class="fas fa-file-signature text-primary me-2"></i>文件命名格式
-                        </h6>
-                        <div class="setting-content">
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="radio" name="filenameFormat" id="formatSongArtist"
-                                    value="song-artist" checked>
-                                <label class="form-check-label" for="formatSongArtist">
-                                    歌曲名 - 歌手名 <span class="text-muted small">(默认)</span>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="filenameFormat" id="formatArtistSong"
-                                    value="artist-song">
-                                <label class="form-check-label" for="formatArtistSong">
-                                    歌手名 - 歌曲名
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                lines.forEach((line, index) => {
+                    const matches = line.match(/\[(\d{2}):(\d{2}[\.:]?\d*)]/);
+                    if (matches) {
+                        const minutes = parseInt(matches[1], 10);
+                        const seconds = parseFloat(matches[2].replace('.', ':')) || 0;
+                        const timestamp = minutes * 60000 + seconds * 1000;
 
-                    <!-- 下载设置 -->
-                    <div class="setting-section mb-3">
-                        <h6 class="setting-title">
-                            <i class="fas fa-archive text-primary me-2"></i>下载设置
-                        </h6>
-                        <div class="setting-content">
-                            <!-- 写入歌曲元数据设置 -->
-                            <div class="form-check form-switch mb-3">
-                                <input class="form-check-input" type="checkbox" id="enableMetadata" checked>
-                                <label class="form-check-label" for="enableMetadata">
-                                    写入歌曲元数据
-                                    <span class="badge bg-success ms-2">
-                                        <i class="fas fa-check-circle me-1"></i>推荐
-                                    </span>
-                                </label>
-                                <div class="form-text text-muted small mt-1">
-                                    <i class="fas fa-lightbulb me-1"></i>
-                                    开启后，系统将在下载时将歌曲封面、歌手及专辑信息、歌词写入歌曲文件的元数据中
-                                </div>
-                            </div>
+                        let text = line.replace(/\[\d{2}:\d{2}[\.:]?\d*\]/g, '').trim();
+                        text = text.replace(/\s\s+/g, ' '); // Replace multiple spaces with a single space
 
-                            <!-- ZIP打包设置 -->
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="enableZipPackage">
-                                <label class="form-check-label" for="enableZipPackage">
-                                    ZIP打包下载
-                                    <span class="badge bg-info ms-2">
-                                        <i class="fas fa-info-circle me-1"></i>仅支持单曲解析
-                                    </span>
-                                </label>
-                                <div class="form-text text-muted small mt-1">
-                                    <i class="fas fa-lightbulb me-1"></i>
-                                    开启后将打包歌曲文件、封面图片(jpg)和歌词文件(lrc)为ZIP格式下载
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" id="saveSettings">
-                        <i class="fas fa-save me-2"></i>保存设置
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+                        data.push([timestamp, index, text]);
+                    }
+                });
+
+                data.sort((a, b) => a[0] - b[0]);
+
+                return data;
+            }
+
+            function lrctran(lyric, tlyric) {
+                lyric = lrctrim(lyric);
+                tlyric = lrctrim(tlyric);
+
+                let len1 = lyric.length;
+                let len2 = tlyric.length;
+                let result = "";
+
+                for (let i = 0, j = 0; i < len1 && j < len2; i++) {
+                    while (lyric[i][0] > tlyric[j][0] && j + 1 < len2) {
+                        j++;
+                    }
+
+                    if (lyric[i][0] === tlyric[j][0]) {
+                        tlyric[j][2] = tlyric[j][2].replace('/', '');
+                        if (tlyric[j][2]) {
+                            lyric[i][2] += ` (翻译：${tlyric[j][2]})`;
+                        }
+                        j++;
+                    }
+                }
+
+                for (let i = 0; i < len1; i++) {
+                    let t = lyric[i][0];
+                    result += `[${String(Math.floor(t / 60000)).padStart(2, '0')}:${String(Math.floor((t % 60000) / 1000)).padStart(2, '0')}.${String(t % 1000).padStart(3, '0')}]${lyric[i][2]}\n`;
+                }
+
+                return result;
+            }
+
+            function extractLinks(text) {
+                var regex = /https?:\/\/\S+/g;
+                var matches = text.match(regex);
+                if (matches) {
+                    return matches[0];
+                } else {
+                    return '';
+                }
+            }
     
-    <script src="https://www.kanxizai.cn/163_music/js/flac-meta.js?v=5.2.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/qualitySelector.js?v=5.2.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/musicParser.js?v=5.2.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/downloader.js?v=5.2.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/announcement.js?v=1.0.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/historyManager.js?v=5.2.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/playlistParser.js?v=5.2.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/settingsManager.js?v=5.2.0"></script>
-    <script src="https://www.kanxizai.cn/163_music/js/main.js?v=5.2.0"></script>
+            function checkValidLink(link) {
+                if (link.indexOf("http") === -1 || 
+                    (link.indexOf("music.163.com") === -1 && link.indexOf("163cn.tv") === -1)) {
+                    return false;
+                }
+                return true;
+            }
     
-    <!-- PV/UV统计脚本 -->
-    <script src="https://www.kanxizai.cn/163_music/js/track.js?v=1.0.0"></script>
-    
+            function extractAndCheckId(text) {
+                var link = extractLinks(text);
+                if (checkValidLink(link)) {
+                    return link;
+                } else {
+                    var idRegex = /\b\d+\b/g;
+                    var ids = text.match(idRegex);
+                    if (ids && ids.length > 0) {
+                        return ids[0];
+                    }
+                    return '';
+                }
+            }
+
+            $('#query-form').on('submit', function(event) {
+                event.preventDefault();
+
+                const songIds = $('#song_ids').val();
+                const level = $('#level').val();
+                const validId = extractAndCheckId(songIds);
+
+                if (!validId) {
+                    alert('请输入有效的歌曲ID或链接');
+                    return;
+                }
+
+                $.post('https://api.kxzjoker.cn/api/163_music', { 
+                    url: validId, 
+                    level: level, 
+                    type:'json' 
+                }, function(data) {
+                    if (data.status === 200) {
+                        // 更新DOM元素
+                        $('#song_name').text(data.name);
+                        $('#song_pic').attr('src', data.pic);
+                        $('#artist_names').text(data.ar_name);
+                        $('#song_alname').text(data.al_name);
+                        $('#song_level').text(data.level);
+                        $('#song_size').text(data.size);
+                        $('#song_url').attr('href', data.url);
+                        
+                        // 处理歌词
+                        let processedLyrics = data.tlyric ? 
+                            lrctran(data.lyric, data.tlyric) : data.lyric;
+                        $('#lyric').html(processedLyrics.replace(/\n/g, '<br>'));
+
+                        // 初始化播放器
+                        new APlayer({
+                            container: document.getElementById('aplayer'),
+                            lrcType: 1,
+                            fixed: true,
+                            audio: [{
+                                name: data.name,
+                                artist: data.ar_name,
+                                url: data.url,
+                                cover: data.pic,
+                                lrc: processedLyrics
+                            }]
+                        });
+
+                        $('#song-info').removeClass('d-none');
+                    } else {
+                        alert('解析失败：' + data.msg);
+                    }
+                }, 'json');
+            });
+        });
+    </script>
 </body>
-
 </html>
