@@ -772,7 +772,7 @@ function handleAudioEnded(){
 }
 const GD_API = "https://yy.zddyr.top/web/api/search.php";
 const PLATFORM_MAP = { netease:"网易云", tencent:"QQ音乐", kuwo:"酷我", kugou:"酷狗", migu:"咪咕" };
-const QUALITY_TO_BR = { "128k":"128", "192k":"192", "320k":"320", flac:"740", "24bit":"999" };
+const QUALITY_TO_BR = { "128k":"128k", "192k":"192k", "320k":"320k", flac:"740", "24bit":"999" };
 const FALLBACK_SOURCES = ["wy","tencent","kugou","kuwo","migu"];
 const audio = document.getElementById("audio");
 const resultList = document.getElementById("resultList");
@@ -1048,7 +1048,7 @@ function updatePlayingHighlight(){
   }
 }
 async function fetchUrl(song, source, id, br) {
-  const url = "https://yy.zddyr.top/web/api/play.php?source=wy&id=" + encodeURIComponent(id) + "&br=" + br;
+  const url = "https://yy.zddyr.top/web/api/play.php?source=wy&id=" + encodeURIComponent(id) + "&quality=" + br;
   const res = await fetch(url);
   if (!res.ok) throw new Error("HTTP " + res.status);
   const txt = await res.text();
@@ -1201,7 +1201,7 @@ function getSafeFileName(artist, title){
 // ✅ 新增/替换：和播放接口完全一致的解析函数
 async function resolveUrlCustomBr(song, brValue){
   const id = song.id; // 网易云歌曲ID
-  const apiUrl = "https://yy.zddyr.top/web/api/play.php?source=wy&id=" + encodeURIComponent(id) + "&br=" + brValue;
+  const apiUrl = "https://yy.zddyr.top/web/api/play.php?source=wy&id=" + encodeURIComponent(id) + "&quality=" + brValue;
   const res = await fetch(apiUrl);
   if (!res.ok) throw new Error("HTTP " + res.status);
   const txt = await res.text();
@@ -1294,7 +1294,7 @@ function toggleDrawer() { document.getElementById("controlsDrawer").classList.to
   document.getElementById("modeBtn").title = modeTips[currentPlayMode];
   initScrollInfinite();
   //页面加载完毕自动填入流行，自动搜索
-  document.getElementById("searchInput").value = "抖音";
+  document.getElementById("searchInput").value = "经典";
   resetAndSearch();
 })();
 </script>
