@@ -1142,7 +1142,7 @@ async function playAt(i) {
   updatePlayingHighlight();
   document.getElementById("nowTitle").textContent = num + "." +  song.title;
   document.getElementById("nowArtist").textContent = song.artist + " · " + song.sourceName;
-  document.title = `🎵 ${song.title} - ${song.artist}`;
+  document.title = `${song.title} - ${song.artist}`;
   // 重置时间显示
   curTimeDom.textContent = "0:00";
   totalTimeDom.textContent = "--:--";
