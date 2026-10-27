@@ -1138,8 +1138,9 @@ async function playAt(i) {
   if (!song) return;
   isPlayLock = true;
   currentIndex = i;
+  const num = i + 1;
   updatePlayingHighlight();
-  document.getElementById("nowTitle").textContent = song.title;
+  document.getElementById("nowTitle").textContent = num + "." +  song.title;
   document.getElementById("nowArtist").textContent = song.artist + " · " + song.sourceName;
   document.title = `🎵 ${song.title} - ${song.artist}`;
   // 重置时间显示
